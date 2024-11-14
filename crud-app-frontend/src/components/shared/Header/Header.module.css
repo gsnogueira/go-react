@@ -1,0 +1,31 @@
+.header {
+    background: #ffe600;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.subHeader{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: black;
+}
+
+.button {
+    color: black;
+}

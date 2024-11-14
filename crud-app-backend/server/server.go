@@ -20,6 +20,7 @@ const (
 var (
 	ctx context.Context
 	app *firebase.App
+	_   = app
 )
 
 func main() {

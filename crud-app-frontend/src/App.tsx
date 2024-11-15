@@ -1,5 +1,5 @@
 import './App.css'
-import Footer from './components/shared/Footer/Footer'
+import { Footer } from './components/shared/Footer/Footer'
 import { Header } from './components/shared/Header/Header'
 import { AppRoutes } from './Routes'
 

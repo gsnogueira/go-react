@@ -33,7 +33,7 @@ const Login: React.FC = () => {
                 </Box>
                 <Box mb={10}>
                     <form id="password">
-                        <label>Password</label>
+                        <label>Senha</label>
                         <Input
                             type="password"
                             value={password}
@@ -43,7 +43,7 @@ const Login: React.FC = () => {
                     </form>
                 </Box>
                 <Button type="submit" colorPalette={'yellow'} width="full">
-                    Login
+                    Entrar
                 </Button>
             </form>
         </Box>

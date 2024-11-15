@@ -1,20 +1,25 @@
 import React from 'react';
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Stack, Image } from '@chakra-ui/react';
 import { Radio, RadioGroup } from '../../components/ui/radio';
+import delivery from '../../assets/images/delivery.jpg';
 
 const Shipping: React.FC = () => {
     return (
-        <div>
-            <h1>Escolha a forma de entrega</h1>
-            <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="6" mt="4">
-                <RadioGroup defaultValue="standard">
-                    <Stack gap={4}>
-                        <Radio value="standard">Enviar no meu endereço</Radio>
-                        <Radio value="express">Retirar em uma Agência Mercado Livre</Radio>
-                    </Stack>
+        <Box p={{ base: 2, md: 4 }} maxW="container.md" mx="auto">
+            <Stack direction={{ base: 'column', md: 'row' }} gap={6}>
+            <Box flex="1" borderWidth="1px" borderRadius="lg" overflow="hidden" p={6}>
+                <RadioGroup variant={'subtle'} size={'lg'} colorPalette={'yellow'} defaultValue="standard">
+                <Stack gap={4}>
+                    <Radio value="standard">Enviar no meu endereço</Radio>
+                    <Radio value="express">Retirar em uma Agência Mercado Livre</Radio>
+                </Stack>
                 </RadioGroup>
             </Box>
-        </div>
+            <Box flex="1">
+                <Image src={delivery} alt="Delivery" width="100%" borderRadius="lg" />
+            </Box>
+            </Stack>
+        </Box>
     );
 };
 

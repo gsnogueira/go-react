@@ -1,0 +1,9 @@
+.button {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+}
+.icon {
+    height: 50px;
+    width: 50px;
+}

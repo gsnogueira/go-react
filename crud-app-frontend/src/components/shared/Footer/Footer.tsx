@@ -1,14 +1,12 @@
 import React from 'react';
 import style from './Footer.module.css';
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
     return (
         <footer className={style.footer}>
             <div className={style.container}>
-                <p>&copy; {new Date().getFullYear()} Meli. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Meli. todos os direitos reservados.</p>
             </div>
         </footer>
     );
 };
-
-export default Footer;

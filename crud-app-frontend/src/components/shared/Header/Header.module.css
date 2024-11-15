@@ -5,13 +5,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    opacity: 0.9;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+
 }
 .subHeader{
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
 }
 
 .logo {
@@ -23,9 +31,4 @@
     display: flex;
     align-items: center;
     position: relative;
-    color: black;
-}
-
-.button {
-    color: black;
 }

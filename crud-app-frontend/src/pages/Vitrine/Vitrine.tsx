@@ -5,6 +5,7 @@ import style from './Vitrine.module.css';
 import { getProducts } from '../../services/product.service';
 import { Product } from '../../models/Product.interface';
 import { Products } from '../../components/shared/Card/Card';
+import { EmptyVitrine } from '../../components/shared/Empty/Empty';
 
 const Vitrine: React.FC = () => {
     const [product, setProduct] = useState<Product[]>([]);
@@ -26,7 +27,7 @@ const Vitrine: React.FC = () => {
         <div className={style.page}>
             <Grid>
                 <GridItem />
-                {product.map((item, index) => (
+                {product.length === 0 ? <EmptyVitrine /> : product.map((item, index) => (
                     <Products key={`${item.id}-${index}`} product={item} />
                 ))}
                 <GridItem />

@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { CardTotal, ProductList } from "../../components/shared/Card/Card";
-import { Empty } from "../../components/shared/Empty/Empty";
+import { EmptyCart } from "../../components/shared/Empty/Empty";
 import { Help } from "../../components/shared/Help/Help";
 
 import { useEffect, useState } from "react";
@@ -32,7 +32,7 @@ export const Cart: React.FC = () => {
 
     return (
         <div className="page">
-            {items.length === 0 ? <Empty /> :
+            {items.length === 0 ? <EmptyCart /> :
                 <Flex direction={{ base: "column", md: "row" }} maxW={'-moz-fit-content'}>
                     <Box flex="1">
                         {items.map(item => (

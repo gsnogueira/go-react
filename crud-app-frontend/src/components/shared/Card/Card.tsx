@@ -31,7 +31,7 @@ export const Products: React.FC<ProductListProps> = ({ product }) => {
             </Card.Body>
             <Card.Footer gap="2">
               <ModalLogin />
-                <Button size={'sm'} variant="ghost" onClick={() => {
+              <Button size={'sm'} variant="ghost" onClick={() => {
                 const currentSession = JSON.parse(localStorage.getItem('cart') || '[]');
                 const existingProductIndex = currentSession.findIndex((item: any) => item.id === product.id);
                 if (existingProductIndex !== -1) {
@@ -42,9 +42,9 @@ export const Products: React.FC<ProductListProps> = ({ product }) => {
                 localStorage.setItem('cart', JSON.stringify(currentSession));
                 setSession('cart', currentSession);
                 window.location.href = '/carrinho';
-                }}>
+              }}>
                 Adicionar ao carrinho
-                </Button>
+              </Button>
             </Card.Footer>
           </Box>
         </Card.Root>
@@ -128,8 +128,8 @@ export const ProductList: React.FC<ProductListProps> = ({ product }) => {
               const currentSession = JSON.parse(localStorage.getItem('cart') || '[]');
               const updatedSession = currentSession.filter((item: any) => item.id !== product.id);
               localStorage.setItem('cart', JSON.stringify(updatedSession));
-                setSession('cart', updatedSession);
-                window.location.reload();
+              setSession('cart', updatedSession);
+              window.location.reload();
             }}>
               <GoTrash />
             </Button>
@@ -158,7 +158,14 @@ export const CardTotal: React.FC = () => {
               Total: {JSON.parse(localStorage.getItem('cart') || '[]').reduce((total: number, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
             </Text>
           </Card.Description>
-          <Button variant={'solid'} colorPalette={'yellow'} onClick={() => window.location.href = '/entrega'} mt="4">
+          <Button variant={'solid'} colorPalette={'yellow'} onClick={() => {
+            const authSession = localStorage.getItem('authSession');
+            if (authSession) {
+              window.location.href = '/entrega';
+            } else {
+              window.location.href = '/login';
+            }
+          }} mt="4">
             Continuar a compra
           </Button>
         </Card.Body>

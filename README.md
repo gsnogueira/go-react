@@ -12,7 +12,7 @@
 
 1. Clone o repositório:
     ```sh
-    git clone https://github.com/gabri/go-react/crud-app-backend.git
+    git clone git@github.com:gsnogueira/go-react.git
     ```
 2. Navegue até o diretório do projeto:
     ```sh
@@ -33,7 +33,7 @@ A aplicação estará rodando em `http://localhost:8080`.
 
 1. Clone o repositório:
     ```sh
-    git clone https://github.com/gabri/go-react/crud-app-frontend.git
+    git clone git@github.com:gsnogueira/go-react.git
     ```
 2. Navegue até o diretório do projeto:
     ```sh

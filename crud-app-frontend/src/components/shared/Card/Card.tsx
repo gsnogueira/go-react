@@ -40,7 +40,7 @@ export const Products: React.FC<ProductListProps> = ({ product }) => {
                   currentSession.push({ ...product, quantity: 1 });
                 }
                 localStorage.setItem('cart', JSON.stringify(currentSession));
-                setSession(currentSession);
+                setSession('cart', currentSession);
                 window.location.href = '/carrinho';
                 }}>
                 Adicionar ao carrinho
@@ -93,7 +93,23 @@ export const ProductList: React.FC<ProductListProps> = ({ product }) => {
               </Card.Body>
               <Card.Footer gap="2">
 
-                <SelectRoot collection={quantity} size="sm" width={{ base: '100%', md: '320px' }}>
+                <SelectRoot
+                  collection={quantity}
+                  size="sm"
+                  width={{ base: '100%', md: '320px' }}
+                  onValueChange={(change) => {
+                    const currentSession = JSON.parse(localStorage.getItem('cart') || '[]');
+                    const updatedSession = currentSession.map((item: any) => {
+                      if (item.id === product.id) {
+                        return { ...item, quantity: change.value[0] };
+                      }
+                      return item;
+                    });
+                    localStorage.setItem('cart', JSON.stringify(updatedSession));
+                    setSession('cart', updatedSession);
+                    window.location.reload();
+                  }}
+                >
                   <SelectLabel>Selecione uma quantidade</SelectLabel>
                   <SelectTrigger>
                     <SelectValueText placeholder={product.quantity.toString()} />
@@ -112,7 +128,7 @@ export const ProductList: React.FC<ProductListProps> = ({ product }) => {
               const currentSession = JSON.parse(localStorage.getItem('cart') || '[]');
               const updatedSession = currentSession.filter((item: any) => item.id !== product.id);
               localStorage.setItem('cart', JSON.stringify(updatedSession));
-                setSession(updatedSession);
+                setSession('cart', updatedSession);
                 window.location.reload();
             }}>
               <GoTrash />

@@ -12,8 +12,8 @@ class SessionService {
         return SessionService.instance;
     }
 
-    public setSession(session: object): void {
-        localStorage.setItem('authSession', JSON.stringify(session));
+    public setSession(sessionKey: string, session: object): void {
+        localStorage.setItem(sessionKey, JSON.stringify(session));
     }
 
     public getSession(sessionKey: string): Product[] {

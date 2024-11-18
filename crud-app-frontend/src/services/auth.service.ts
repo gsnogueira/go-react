@@ -1,22 +1,12 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { environment } from '../environments/environment';
 
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-// Initialize Firebase
 if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(environment.firebase);
 }
 
-const auth = firebase.auth();
+export const auth = firebase.auth();
 
 const AuthService = {
     signUp: async (email: string, password: string) => {
@@ -47,6 +37,19 @@ const AuthService = {
 
     getCurrentUser: () => {
         return auth.currentUser;
+    },
+    
+    updatePassword: async (newPassword: string) => {
+        const user = auth.currentUser;
+        if (user) {
+            try {
+                await user.updatePassword(newPassword);
+            } catch (error) {
+                throw error;
+            }
+        } else {
+            throw new Error("No user is currently signed in.");
+        }
     }
 };
 

@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
 import { Box, Input, Button } from '@chakra-ui/react';
+import authService from '../../services/auth.service';
+import Alert from '../../components/shared/Alert/Alert';
 
 
 const Register: React.FC = () => {
     const [userName, setUser] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [alert, setAlert] = useState<{ type: 'success' | 'error' | 'info' | 'warning', message: string } | null>(null);
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        console.log('Email:', email);
-        console.log('Password:', password);
+        try {
+            await authService.signUp(email, password);
+            setAlert({ type: 'success', message: 'Cadastro bem-sucedido!' });
+                window.location.href = '/login';
+        } catch (error) {
+            setAlert({ type: 'error', message: 'Falha no cadastro. Por favor, tente novamente' });
+        }
     };
 
     return (
         <Box maxW="sm" mx="auto" mt={10} p={6} border={'none'} borderRadius="lg" boxShadow="md">
+            {alert && (
+                <Alert status={alert.type} title={alert.message} />
+            )}
             <form onSubmit={handleSubmit}>
                 <Box mb={5}>
                     <form id="user">

@@ -1,9 +1,10 @@
 import styles from './Header.module.css'
 import logo from '../../../assets/images/meli-short.png'
-import { Box, Flex, IconButton, Button, Float, Circle } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Button, Float, Circle, MenuItem, MenuContent, MenuRoot, MenuTrigger } from "@chakra-ui/react";
 import { BiCart } from "react-icons/bi";
 import { RxDividerVertical } from 'react-icons/rx';
 import { FaApple } from 'react-icons/fa';
+import { Connfigurations } from '../Modal/Modal';
 
 export const Header: React.FC = () => {
 
@@ -15,21 +16,48 @@ export const Header: React.FC = () => {
         </Button>
         <Flex align="center">
           <Box>
-            <Button color='black' className={styles.button} variant="plain" size="lg" onClick={() => window.location.href = '/login'}>
-              Entre
-            </Button>
+            {localStorage.getItem('authSession') && (
+              <MenuRoot>
+                <MenuTrigger asChild>
+                  <Button color='black' className={styles.button} variant="plain" size="lg">
+                    {JSON.parse(localStorage.getItem('authSession') || '{}').email}
+                  </Button>
+                </MenuTrigger>
+                <MenuContent position={'absolute'}>
+                  <MenuItem value="configuracoes">
+                    <Connfigurations />
+                  </MenuItem>
+                  <MenuItem value="logout" onClick={() => {
+                    localStorage.removeItem('authSession');
+                    window.location.href = '/';
+                  }}><Button size={'sm'} variant="plain">
+                      Logout
+                    </Button>
+                  </MenuItem>
+                </MenuContent>
+              </MenuRoot>
+            )}
           </Box>
           <Box>
-            <Button color='black' className={styles.button} variant="plain" size="lg" onClick={() => window.location.href = '/cadastro'}>
-              Cadastre-se
-            </Button>
+            {!localStorage.getItem('authSession') && (
+              <Button color='black' className={styles.button} variant="plain" size="lg" onClick={() => window.location.href = '/login'}>
+                Entre
+              </Button>
+            )}
+          </Box>
+          <Box>
+            {!localStorage.getItem('authSession') && (
+              <Button color='black' className={styles.button} variant="plain" size="lg" onClick={() => window.location.href = '/cadastro'}>
+                Cadastre-se
+              </Button>
+            )}
           </Box>
           <Box>
             <IconButton color='black' variant="plain" size="lg" aria-label="Search database" onClick={() => window.location.href = '/carrinho'}>
               <BiCart className={styles.icon} />
               <Float>
                 <Circle size="5" bg="white" color="black">
-                {JSON.parse(localStorage.getItem('cart') || '[]').reduce((total: number, item: any) => total + item.quantity, 0)}
+                  {JSON.parse(localStorage.getItem('cart') || '[]').reduce((total: number, item: any) => total + item.quantity, 0)}
                 </Circle>
               </Float>
             </IconButton>

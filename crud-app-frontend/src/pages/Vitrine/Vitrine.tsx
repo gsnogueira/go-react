@@ -1,35 +1,33 @@
 import React from 'react';
 import { Grid, GridItem } from "@chakra-ui/react";
-import { Product } from '../../components/shared/Card/Card';
 import { useState, useEffect } from 'react';
-import Loader from '../../components/shared/Loader/Loader';
 import style from './Vitrine.module.css';
-
-const products = [
-    { id: 1, name: 'Iphone 16 Pro', price: 100 },
-    { id: 1, name: 'Iphone 16 Pro', price: 100 },
-    { id: 1, name: 'Iphone 16 Pro', price: 100 },
-];
+import { getProducts } from '../../services/product.service';
+import { Product } from '../../models/Product.interface';
+import { Products } from '../../components/shared/Card/Card';
 
 const Vitrine: React.FC = () => {
-    const [loading, setLoading] = useState(true);
+    const [product, setProduct] = useState<Product[]>([]);
 
     useEffect(() => {
-        // Simulate a network request
-        setTimeout(() => {
-            setLoading(false);
-        }, 500);
+        const fetchOffers = async () => {
+            try {
+                const product = await getProducts();
+                setProduct(product);
+            } catch (error) {
+                console.error('Failed to fetch offers', error);
+            }
+        };
+
+        fetchOffers();
     }, []);
-    
-    if (loading) {
-        return <Loader/>
-    }
+
     return (
         <div className={style.page}>
             <Grid>
                 <GridItem />
-                {products.map(item => (
-                    <Product key={item.id} product={item} />
+                {product.map((item, index) => (
+                    <Products key={`${item.id}-${index}`} product={item} />
                 ))}
                 <GridItem />
             </Grid>

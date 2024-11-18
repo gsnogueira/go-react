@@ -3,22 +3,39 @@ import { CardTotal, ProductList } from "../../components/shared/Card/Card";
 import { Empty } from "../../components/shared/Empty/Empty";
 import { Help } from "../../components/shared/Help/Help";
 
-const Itens = [
-    { id: 1, name: 'Iphone 16', price: 100 },
-    { id: 1, name: 'Iphone 16', price: 100 },
-    { id: 1, name: 'Iphone 16', price: 100 },
-    { id: 1, name: 'Iphone 16', price: 100 },
-]
+import { useEffect, useState } from "react";
 
+import { Product } from "../../models/Product.interface";	
+import Loader from "../../components/shared/Loader/Loader";
+import { getSession } from "../../services/session.service";
 
 export const Cart: React.FC = () => {
+    const [items, setItems] = useState<Product[]>([]);
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const products = await getSession('cart') || [];
+            setItems(products);
+        };
+
+        fetchProducts();
+        setTimeout(() => {
+            setLoading(false);
+        }, 100);
+    }, []);
+    
+    if (loading) {
+        return <Loader/>
+    }
+
     return (
         <div className="page">
-            {Itens.length === 0 ? <Empty /> :
+            {items.length === 0 ? <Empty /> :
                 <Flex direction={{ base: "column", md: "row" }} maxW={'-moz-fit-content'}>
                     <Box flex="1">
-                        <ProductList />
-                        {Itens.map(item => (
+                        {items.map(item => (
                             <ProductList key={item.id} product={item} />
                         ))}
                     </Box>

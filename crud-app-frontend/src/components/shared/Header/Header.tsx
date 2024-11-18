@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
               <BiCart className={styles.icon} />
               <Float>
                 <Circle size="5" bg="white" color="black">
-                  3
+                {JSON.parse(localStorage.getItem('cart') || '[]').reduce((total: number, item: any) => total + item.quantity, 0)}
                 </Circle>
               </Float>
             </IconButton>

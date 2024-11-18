@@ -1,3 +1,6 @@
+## Tecnologias usadas
+[![My Skills](https://skillicons.dev/icons?i=react,go,firebase,vite)](https://skillicons.dev)
+
 ## Tutorial para executar a aplicação
 
 ### Pré-requisitos
@@ -46,3 +49,5 @@ A aplicação estará rodando em `http://localhost:8080`.
     ```
 
 A aplicação estará rodando em `http://localhost:5173`.
+
+![image](https://github.com/user-attachments/assets/b172fbf1-fa6f-4dae-8afe-f1ce0706aca5)
